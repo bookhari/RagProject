@@ -108,7 +108,5 @@ if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
         pdf_path = sys.argv[1]
-    #else:
-        #pdf_path = "Arthritis_AR.pdf"  # Default file if none provided.
-    embed_and_store_text(pdf_path)
-    print("File processed successfully.")
+        embed_and_store_text(pdf_path)
+        print("File processed successfully.")
