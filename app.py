@@ -47,4 +47,4 @@ def query():
     return jsonify({'answer': answer}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.debug = False  # Ensure debug mode is off when running via Gunicorn
