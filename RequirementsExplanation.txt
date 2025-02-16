@@ -1,0 +1,8 @@
+Flask: The web framework used for the backend API.
+python-dotenv: Loads environment variables from a .env file.
+pinecone-client: The Pinecone client library for vector database operations.
+openai: The official OpenAI client library.
+PyMuPDF: Provides the fitz module to extract text from PDF files.
+arabic-reshaper: Reshapes Arabic characters so they render properly.
+python-bidi: Fixes bidirectional text issues for languages like Arabic.
+langchain: Provides the components for embeddings, text splitting, and retrieval-augmented generation.
