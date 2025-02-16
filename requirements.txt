@@ -3,6 +3,6 @@ python-dotenv==0.21.0
 pinecone-client==2.2.0
 openai==0.27.0
 PyMuPDF==1.25.3
-arabic-reshaper==2.1.0
+arabic-reshaper
 python-bidi==0.4.2
 langchain==0.0.148
