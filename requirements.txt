@@ -8,4 +8,4 @@ arabic-reshaper
 python-bidi==0.4.2
 langchain==0.0.148
 python-bidi==0.4.2
-werkzeug
+Werkzeug==2.3.7
