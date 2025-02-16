@@ -7,4 +7,5 @@ PyMuPDF==1.25.3
 arabic-reshaper
 python-bidi==0.4.2
 langchain==0.0.148
+python-bidi==0.4.2
 werkzeug
