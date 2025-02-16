@@ -1,12 +1,8 @@
-# backend.py
-
 import os
 import pinecone
 import openai
 import fitz  # PyMuPDF for PDF processing
 import time
-import arabic_reshaper  # Fixes Arabic letter shapes
-from bidi.algorithm import get_display  # Corrects RTL text direction
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Pinecone as LangchainPinecone
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -61,7 +57,10 @@ def process_batch(batch, embeddings):
                 raise
 
 def embed_and_store_text(pdf_path):
-    """Extracts text from a PDF, splits it into chunks, and stores embeddings in Pinecone."""
+    """
+    Extracts text from a PDF, splits it into chunks, and stores embeddings in Pinecone.
+    The `pdf_path` is provided by the Flask endpoint from the uploaded file.
+    """
     text = extract_text_from_pdf(pdf_path)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
     texts = text_splitter.split_text(text)
@@ -76,7 +75,7 @@ def embed_and_store_text(pdf_path):
         time.sleep(2)  # Delay between batches
 
 def initialize_rag():
-    """Initializes the retrieval chain using the new create_retrieval_chain constructor."""
+    """Initializes the retrieval chain using the create_retrieval_chain constructor."""
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     vector_store = LangchainPinecone.from_existing_index(index_name=pinecone_index_name, embedding=embeddings)
     retriever = vector_store.as_retriever()
@@ -97,20 +96,19 @@ def initialize_rag():
     return qa_chain
 
 def ask_chatgpt_arabic(query):
-    """Queries the retrieval chain with an Arabic query and returns the response."""
+    """Queries the retrieval chain with an Arabic query and returns the raw response."""
     qa_chain = initialize_rag()
     response = qa_chain.invoke({"input": query})
-    answer = response["answer"]
+    answer = response["answer"]  # Extract the answer from the response dictionary
+    # Return the raw answer so the browser can handle shaping and direction.
+    return answer
 
-    # Fix Arabic letter shapes only (let browser handle RTL direction)
-    reshaped_text = arabic_reshaper.reshape(answer)
-    return reshaped_text  # Removed get_display()
-
-# Optional: You can include a main block for testing purposes.
+# Optional: Testing from the command line.
 if __name__ == "__main__":
-    pdf_path = "Bronchitis_ARA.pdf"  # Update with your PDF file path if necessary
+    import sys
+    if len(sys.argv) > 1:
+        pdf_path = sys.argv[1]
+    #else:
+        #pdf_path = "Arthritis_AR.pdf"  # Default file if none provided.
     embed_and_store_text(pdf_path)
-    
-    user_query = "ما هي اعراض الالتهاب؟"
-    answer = ask_chatgpt_arabic(user_query)
-    print("الإجابة:", answer)
+    print("File processed successfully.")

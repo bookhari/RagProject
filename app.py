@@ -6,7 +6,7 @@ from backend import embed_and_store_text, ask_chatgpt_arabic
 
 app = Flask(__name__)
 
-# Serve the index.html file when accessing the root URL.
+# Serve the index.html file at the root URL.
 @app.route('/')
 def index():
     return send_file('index.html')

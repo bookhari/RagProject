@@ -4,41 +4,29 @@
   <meta charset="UTF-8">
   <title>بوت الدردشة - رفع ملفات PDF وطرح الأسئلة</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      direction: rtl;
-      text-align: right;
-      margin: 40px;
+    body { 
+      font-family: 'Cairo', sans-serif; 
+      direction: rtl; 
+      text-align: right; 
+      margin: 40px; 
     }
-    h1, h2 {
-      color: #333;
-    }
-    form {
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-    }
+    h1, h2 { color: #333; }
+    form { margin-bottom: 20px; }
+    label { display: block; margin-top: 10px; }
     input[type="file"],
-    input[type="text"] {
-      width: 300px;
-      padding: 8px;
+    input[type="text"] { width: 300px; padding: 8px; }
+    button { margin-top: 10px; padding: 8px 16px; }
+    #response { 
+      margin-top: 20px; 
+      background: #f9f9f9; 
+      padding: 10px; 
+      border: 1px solid #ddd; 
+      direction: rtl; 
+      text-align: right; 
     }
-    button {
-      margin-top: 10px;
-      padding: 8px 16px;
-    }
-    #response {
-  margin-top: 20px;
-  background: #f9f9f9;
-  padding: 10px;
-  border: 1px solid #ddd;
-  direction: rtl;        /* Explicit RTL direction */
-  text-align: right;     /* Right-align text */
-  unicode-bidi: embed;   /* Handle bidirectional text */
-}
   </style>
+  <!-- Include an Arabic-supporting font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 </head>
 <body>
   <h1>رفع ملف PDF وطرح الأسئلة</h1>
@@ -60,7 +48,7 @@
   </form>
   
   <h2>الإجابة:</h2>
-  <div id="response" dir="rtl"></div>
+  <div id="response"></div>
 
   <script>
     // Handle PDF upload
