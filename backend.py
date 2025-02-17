@@ -6,7 +6,7 @@ import time
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Pinecone as LangchainPinecone
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chains.retrieval import RetrievalQA
+from langchain.chains import create_retrieval_chain
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -75,10 +75,12 @@ def embed_and_store_text(pdf_path):
         time.sleep(2)  # Delay between batches
 
 def initialize_rag():
+    """Initializes the retrieval chain using the create_retrieval_chain constructor."""
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     vector_store = LangchainPinecone.from_existing_index(index_name=pinecone_index_name, embedding=embeddings)
     retriever = vector_store.as_retriever()
     
+    # Arabic prompt template
     prompt = ChatPromptTemplate.from_template("""
     أجب على السؤال بناءً على السياق التالي باللغة العربية:
     {context}
@@ -89,9 +91,7 @@ def initialize_rag():
     
     llm = ChatOpenAI(model_name="gpt-4", openai_api_key=OPENAI_API_KEY)
     document_chain = create_stuff_documents_chain(llm, prompt)
-    
-    # Fix: Use RetrievalQA instead of create_retrieval_chain
-    qa_chain = RetrievalQA(combine_documents_chain=document_chain, retriever=retriever)
+    qa_chain = create_retrieval_chain(retriever, document_chain)
     
     return qa_chain
 
@@ -108,5 +108,7 @@ if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
         pdf_path = sys.argv[1]
-        embed_and_store_text(pdf_path)
-        print("File processed successfully.")
+    #else:
+        #pdf_path = "Arthritis_AR.pdf"  # Default file if none provided.
+    embed_and_store_text(pdf_path)
+    print("File processed successfully.")
