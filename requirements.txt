@@ -7,7 +7,7 @@ PyMuPDF==1.25.3
 arabic-reshaper
 python-bidi==0.4.2
 langchain==0.0.148
-langchain-openai==0.5.1
+langchain-openai
 langchain-core==0.2.10
 langchain-community
 python-bidi==0.4.2
