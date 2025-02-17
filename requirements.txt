@@ -2,7 +2,7 @@ Flask==2.2.2
 gunicorn==20.1.0
 python-dotenv==0.21.0
 pinecone-client==2.2.0
-openai==0.27.0
+openai
 PyMuPDF==1.25.3
 arabic-reshaper
 python-bidi==0.4.2
