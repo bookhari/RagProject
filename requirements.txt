@@ -9,6 +9,6 @@ python-bidi==0.4.2
 langchain==0.0.148
 langchain-openai==0.5.1
 langchain-core==0.2.10
-langchain-community==0.3.16
+langchain-community
 python-bidi==0.4.2
 Werkzeug==2.3.7
