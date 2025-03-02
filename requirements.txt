@@ -1,8 +1,0 @@
-
-flask
-werkzeug
-python-dotenv
-pinecone-client
-openai
-pymupdf
-langchain
